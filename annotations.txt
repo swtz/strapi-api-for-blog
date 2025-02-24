@@ -1,0 +1,8 @@
+Curso:
+Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest , Storybook, Strapi, HTML e CSS com TypeScript e JavaScript.
+
+Seção:
+Seção 13: Projeto 2: Blog - Back-End com Strapi
+
+Aula:
+223. Criando um novo projeto Strapi
