@@ -381,6 +381,11 @@ export interface ApiAuthorAuthor extends Schema.CollectionType {
     > &
       Attribute.Private;
     displayName: Attribute.String & Attribute.Required;
+    posts: Attribute.Relation<
+      'api::author.author',
+      'oneToMany',
+      'api::post.post'
+    >;
     publishedAt: Attribute.DateTime;
     slug: Attribute.UID<'api::author.author', 'displayName'> &
       Attribute.Required;
@@ -413,6 +418,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     > &
       Attribute.Private;
     displayName: Attribute.String & Attribute.Required;
+    posts: Attribute.Relation<
+      'api::category.category',
+      'manyToMany',
+      'api::post.post'
+    >;
     publishedAt: Attribute.DateTime;
     slug: Attribute.UID<'api::category.category', 'displayName'> &
       Attribute.Required;
@@ -422,6 +432,58 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts';
+  info: {
+    displayName: 'post';
+    pluralName: 'posts';
+    singularName: 'post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    allowComments: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    author: Attribute.Relation<
+      'api::post.post',
+      'manyToOne',
+      'api::author.author'
+    >;
+    categories: Attribute.Relation<
+      'api::post.post',
+      'manyToMany',
+      'api::category.category'
+    >;
+    content: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor5video.CKEditor5Video',
+        {
+          preset: 'toolbar';
+        }
+      >;
+    cover: Attribute.Media<'images'>;
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    excerpt: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255;
+        minLength: 3;
+      }>;
+    publishedAt: Attribute.DateTime;
+    slug: Attribute.UID<'api::post.post', 'title'> & Attribute.Required;
+    tags: Attribute.Relation<'api::post.post', 'manyToMany', 'api::tag.tag'>;
+    title: Attribute.String & Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -483,6 +545,7 @@ export interface ApiTagTag extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     displayName: Attribute.String & Attribute.Required;
+    posts: Attribute.Relation<'api::tag.tag', 'manyToMany', 'api::post.post'>;
     publishedAt: Attribute.DateTime;
     slug: Attribute.UID<'api::tag.tag', 'displayName'> & Attribute.Required;
     updatedAt: Attribute.DateTime;
@@ -929,6 +992,7 @@ declare module '@strapi/types' {
       'admin::user': AdminUser;
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
+      'api::post.post': ApiPostPost;
       'api::setting.setting': ApiSettingSetting;
       'api::tag.tag': ApiTagTag;
       'plugin::content-releases.release': PluginContentReleasesRelease;

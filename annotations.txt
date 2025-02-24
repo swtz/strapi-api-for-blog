@@ -4,5 +4,8 @@ Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest , Storybook, Strapi,
 Seção:
 Seção 13: Projeto 2: Blog - Back-End com Strapi
 
-Aula:
-228. Collection Types - Category, Tag e Author
+Aulas:
+229. Collection Type - Post
+231. Liberando os posts na API pública
+// Examplo de requisição:
+// http://localhost:1337/api/posts?filters[slug]=hello-fox&populate=deep
