@@ -362,6 +362,70 @@ export interface AdminUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAuthorAuthor extends Schema.CollectionType {
+  collectionName: 'authors';
+  info: {
+    displayName: 'author';
+    pluralName: 'authors';
+    singularName: 'author';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    displayName: Attribute.String & Attribute.Required;
+    publishedAt: Attribute.DateTime;
+    slug: Attribute.UID<'api::author.author', 'displayName'> &
+      Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    displayName: 'category';
+    pluralName: 'categories';
+    singularName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    displayName: Attribute.String & Attribute.Required;
+    publishedAt: Attribute.DateTime;
+    slug: Attribute.UID<'api::category.category', 'displayName'> &
+      Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSettingSetting extends Schema.SingleType {
   collectionName: 'settings';
   info: {
@@ -400,6 +464,29 @@ export interface ApiSettingSetting extends Schema.SingleType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    displayName: 'tag';
+    pluralName: 'tags';
+    singularName: 'tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    displayName: Attribute.String & Attribute.Required;
+    publishedAt: Attribute.DateTime;
+    slug: Attribute.UID<'api::tag.tag', 'displayName'> & Attribute.Required;
+    updatedAt: Attribute.DateTime;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -840,7 +927,10 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::author.author': ApiAuthorAuthor;
+      'api::category.category': ApiCategoryCategory;
       'api::setting.setting': ApiSettingSetting;
+      'api::tag.tag': ApiTagTag;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -5,4 +5,4 @@ Seção:
 Seção 13: Projeto 2: Blog - Back-End com Strapi
 
 Aula:
-227. Single Type Settings do Blog e correção do CKEditor
+228. Collection Types - Category, Tag e Author
