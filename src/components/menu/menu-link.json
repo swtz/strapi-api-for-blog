@@ -17,6 +17,12 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "text": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255,
+      "minLength": 3
     }
   }
 }

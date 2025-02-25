@@ -15,6 +15,12 @@ export interface MenuMenuLink extends Schema.Component {
         minLength: 1;
       }>;
     newTab: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    text: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 255;
+        minLength: 3;
+      }>;
   };
 }
 
