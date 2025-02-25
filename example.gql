@@ -1,0 +1,140 @@
+fragment image on UploadFile {
+  url
+  alternativeText
+}
+
+fragment menuLink on ComponentMenuMenuLink {
+  link
+  newTab
+  text
+}
+
+fragment tag on Tag {
+  displayName
+  slug
+}
+
+fragment category on Category {
+  displayName
+  slug
+}
+
+fragment author on Author {
+  displayName
+  slug
+}
+
+fragment post on Post {
+  title
+  slug
+  excerpt
+  content
+  allowComments
+  tags {
+    data {
+      id
+      attributes {
+        ...tag
+      }
+    }
+  }
+  author {
+    data {
+      id
+      attributes {
+        ...author
+      }
+    }
+  }
+  categories {
+    data {
+      id
+      attributes {
+        ...category
+      }
+    }
+  }
+  cover {
+    data {
+      attributes {
+        ...image
+      }
+    }
+  }
+}
+
+query GET_SETTINGS {
+  setting {
+    data {
+      id
+      attributes {
+        blogName
+        blogDescription
+        logo {
+          data {
+            id
+            attributes {
+              ...image
+            }
+          }
+        }
+        menuLink {
+          ...menuLink
+        }
+        footerHtml: text
+      }
+    }
+  }
+
+  posts {
+    data {
+      attributes {
+        ...post
+      }
+    }
+  }
+}
+
+query GET_POST_BY_SLUG($slug: String) {
+  posts(filters: { slug: { eq: $slug } }) {
+    data {
+      id
+      attributes {
+        ...post
+      }
+    }
+  }
+}
+
+query GET_POSTS_BY_AUTHOR($authorSlug: String!) {
+  posts(filters: { author: { slug: { eq: $authorSlug } } }) {
+    data {
+      id
+      attributes {
+        ...post
+      }
+    }
+  }
+}
+
+query GET_POSTS_BY_CATEGORY($categorySlug: String!) {
+  posts(filters: { categories: { slug: { eq: $categorySlug } } }) {
+    data {
+      id
+      attributes {
+        ...post
+      }
+    }
+  }
+}
+
+query GET_POSTS_BY_TAGS($tagSlug: String!) {
+  posts(filters: { tags: { slug: { eq: $tagSlug } } }) {
+    data {
+      id
+      attributes {
+        ...post
+      }
+    }
+  }
+}

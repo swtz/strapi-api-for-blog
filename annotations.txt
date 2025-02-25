@@ -5,7 +5,8 @@ Seção:
 Seção 13: Projeto 2: Blog - Back-End com Strapi
 
 Aulas:
-229. Collection Type - Post
-231. Liberando os posts na API pública
-// Examplo de requisição:
-// http://localhost:1337/api/posts?filters[slug]=hello-fox&populate=deep
+232. Instalando o GraphQL no Strapi (ok)
+233. Introdução ao PlayGround e links úteis (ok)
+234. Mais sobre Queries do GraphQL (ok)
+235. Reutilize código com fragment (ok)
+236. Query Variables no GraphQL (ok)
