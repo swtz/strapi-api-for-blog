@@ -1,3 +1,5 @@
+# updated at: class 237 (section 13)
+
 fragment image on UploadFile {
   url
   alternativeText
@@ -63,31 +65,27 @@ fragment post on Post {
   }
 }
 
-query GET_SETTINGS {
-  setting {
+fragment settings on Setting {
+  blogName
+  blogDescription
+  logo {
     data {
       id
       attributes {
-        blogName
-        blogDescription
-        logo {
-          data {
-            id
-            attributes {
-              ...image
-            }
-          }
-        }
-        menuLink {
-          ...menuLink
-        }
-        footerHtml: text
+        ...image
       }
     }
   }
+  menuLink {
+    ...menuLink
+  }
+  text
+}
 
+query GET_POSTS {
   posts {
     data {
+      id
       attributes {
         ...post
       }
@@ -96,6 +94,15 @@ query GET_SETTINGS {
 }
 
 query GET_POST_BY_SLUG($slug: String) {
+  setting {
+    data {
+      id
+      attributes {
+        ...settings
+      }
+    }
+  }
+
   posts(filters: { slug: { eq: $slug } }) {
     data {
       id
@@ -107,6 +114,15 @@ query GET_POST_BY_SLUG($slug: String) {
 }
 
 query GET_POSTS_BY_AUTHOR($authorSlug: String!) {
+  setting {
+    data {
+      id
+      attributes {
+        ...settings
+      }
+    }
+  }
+
   posts(filters: { author: { slug: { eq: $authorSlug } } }) {
     data {
       id
@@ -118,6 +134,15 @@ query GET_POSTS_BY_AUTHOR($authorSlug: String!) {
 }
 
 query GET_POSTS_BY_CATEGORY($categorySlug: String!) {
+  setting {
+    data {
+      id
+      attributes {
+        ...settings
+      }
+    }
+  }
+
   posts(filters: { categories: { slug: { eq: $categorySlug } } }) {
     data {
       id
@@ -129,6 +154,15 @@ query GET_POSTS_BY_CATEGORY($categorySlug: String!) {
 }
 
 query GET_POSTS_BY_TAGS($tagSlug: String!) {
+  setting {
+    data {
+      id
+      attributes {
+        ...settings
+      }
+    }
+  }
+
   posts(filters: { tags: { slug: { eq: $tagSlug } } }) {
     data {
       id

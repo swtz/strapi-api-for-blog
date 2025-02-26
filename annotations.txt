@@ -4,9 +4,5 @@ Aprenda ReactJS, NextJS, Styled-Components, Testes com Jest , Storybook, Strapi,
 Seção:
 Seção 13: Projeto 2: Blog - Back-End com Strapi
 
-Aulas:
-232. Instalando o GraphQL no Strapi (ok)
-233. Introdução ao PlayGround e links úteis (ok)
-234. Mais sobre Queries do GraphQL (ok)
-235. Reutilize código com fragment (ok)
-236. Query Variables no GraphQL (ok)
+Aula:
+237. Queries do front-end + Fetch API para GraphQL
